@@ -56,6 +56,10 @@ def registerPage(request):
     return render(request, 'base/login_register.html', {'form': form})
 
 
+def get_customer(job):
+    customer_id = Match.objects.filter(job=job, type=MatchType.objects.get_or_create(name='Customer')[0]).values('user')[0]
+    return User.objects.get(id=customer_id['user'])
+
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
@@ -70,22 +74,32 @@ def home(request):
     job_messages = Message.objects.filter(
         Q(job__topic__name__icontains=q))[0:3]
 
-    job_customer = User.objects.all()[0] # TODO: правильно определить customer для этой job
+    # job_customer = User.objects.all()[0] # TODO: правильно определить customer для этой job
+    # job_to_customer = Match.objects.filter(type=MatchType.objects.get_or_create(name='Customer')[0]).values('job', 'user')
+    job_to_customer = {}  # Создаем пустой словарь
 
+    for job in jobs:
+        customer = get_customer(job)
+        if customer:
+            job_to_customer[job] = customer 
+
+    messages.error(request, f'{jobs}')
     context = {'jobs': jobs, 
-               'job_customer': job_customer, 
+               'job_to_customer': job_to_customer, 
                'topics': topics,
                'job_count': job_count, 
                'job_messages': job_messages}
     
+
     return render(request, 'base/home.html', context)
 
 
 def job(request, pk):
     job = Job.objects.get(id=pk)
     job_messages = job.message_set.all()
-    # participants = job.participants.all()
-    participants = User.objects.all() # TODO: правильно определять всех participant для данной job
+    participants_id = Match.objects.filter(job=job).values('user')
+    participants = User.objects.filter(id__in=[user_id['user'] for user_id in participants_id])
+    print()
     if request.method == 'POST':
         message = Message.objects.create(
             user=request.user,
@@ -102,7 +116,8 @@ def job(request, pk):
             match.save()
         return redirect('job', pk=job.id)
     
-    job_customer = User.objects.all()[0] # job_customer
+    customer_id = Match.objects.filter(job=job, type=MatchType.objects.get_or_create(name='Customer')[0]).values('user')
+    job_customer = User.objects.filter(id=customer_id[0]['user'])[0]
     context = {'job': job, 'job_messages': job_messages,
                'participants': participants,
                'job_customer': job_customer}
@@ -132,7 +147,7 @@ def createJob(request):
             name=request.POST.get('name'),
             description=request.POST.get('description'),
             status = JobStatus.objects.get_or_create(name='Find performer')[0],
-            cost=request.POST.get('cost'), # NULL
+            cost=request.POST.get('cost'),
         )
         job.save()
         match = Match.objects.create(
@@ -149,11 +164,13 @@ def createJob(request):
 
 @login_required(login_url='login')
 def updateJob(request, pk):
-    # job = Job.objects.get(id=pk)
-    # form = JobForm(instance=job)
-    # topics = Topic.objects.all()
-    # if request.user != job.host:
-    #     return HttpResponse('Your are not allowed here!!')
+    job = Job.objects.get(id=pk)
+    form = JobForm(instance=job)
+    topics = Topic.objects.all()
+    customer_id = Match.objects.filter(job=job, type=MatchType.objects.get_or_create(name='Customer')[0]).values('user')
+    job_customer = User.objects.filter(id=customer_id[0]['user'])[0]
+    if request.user != job_customer:
+        return HttpResponse('Your are not allowed here!!')
 
     # if request.method == 'POST':
     #     topic_name = request.POST.get('topic')

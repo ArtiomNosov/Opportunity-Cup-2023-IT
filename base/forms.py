@@ -1,6 +1,11 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from .models import Job, User
+from django import forms
+
+
+class SlugField(CharField):
+    default_validators = [validators.validate_slug]
 
 
 class MyUserCreationForm(UserCreationForm):
@@ -15,6 +20,10 @@ class JobForm(ModelForm):
         model = Job
         fields = ['name', 'description', 'topic', 'cost']
         exclude = []
+        widgets = {
+            'cost' : forms.TextInput(attrs = {'placeholder': '1000 руб'}),
+        }
+        
 
 
 class UserForm(ModelForm):

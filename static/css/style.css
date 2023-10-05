@@ -275,6 +275,10 @@ a {
   gap: 9.5rem;
 }
 
+.header__user__balance{
+  margin-right: auto;
+}
+
 .header__logo,
 .header__user {
   display: flex;
@@ -681,6 +685,10 @@ a {
 
 .jobListJob__content {
   margin: 1rem 0;
+}
+
+.jobListJob__content > .cost{
+  margin-right: auto;
 }
 
 .jobListJob__content a {

@@ -1,5 +1,6 @@
 {% extends 'main.html' %} # TODO: в логине на странице login выводит html теги в placeholder
 # сделать объяснение юзеру что слишком простой пароль в логин форме, а то выводит ошибку просто
+# TODO: если у пользователь уже зареган ошибка
 
 {% block content %}
 <main class="auth layout">
@@ -18,8 +19,8 @@
         <form class="form" action="" method="POST">
           {% csrf_token %}
           <div class="form__group form__group">
-            <label for="job_name">Email</label>
-            <input id="username" name="email" type="email" placeholder="e.g. dennis_ivy@email.com />
+            <label for="username">Email</label>
+            <input id="username" name="email" type="email" placeholder="e.g. dennis_ivy@email.com" />
           </div>
           <div class=" form__group">
             <label for="password">Password</label>

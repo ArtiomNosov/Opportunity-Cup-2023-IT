@@ -10,7 +10,7 @@ class User(AbstractUser):
 
     avatar = models.ImageField(null=True, default='avatar.svg')
 
-    balance = MoneyField(max_digits=19, decimal_places=4, default_currency='RUB', default=0)
+    balance = models.DecimalField(max_digits=20, decimal_places=2, null=False, default=0)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -17,11 +17,13 @@
             </label>
         </form>
         <nav class="header__menu">
-
-
             <!-- Logged In -->
+            
             {% if request.user.is_authenticated %}
             <div class="header__user">
+                <div class="header__user__balance">
+                    <p><span>Баланс: {{user.balance}} руб.</span></p>
+                </div>
                 <a href="{% url 'update-user' %}">
                     <div class="avatar avatar--medium active">
                         <img src="{{request.user.avatar.url}}" />
