@@ -67,7 +67,7 @@ def registerPage(request):
 def home(request):
     # q = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    # rooms = Room.objects.filter(
+    # rooms = Job.objects.filter(
     #     Q(topic__name__icontains=q) |
     #     Q(name__icontains=q) |
     #     Q(description__icontains=q)
@@ -84,24 +84,24 @@ def home(request):
     return render(request, 'base/home.html', context)
 
 
-def room(request, pk):
-    # room = Room.objects.get(id=pk)
-    # room_messages = room.message_set.all()
-    # participants = room.participants.all()
+def job(request, pk):
+    # job = Job.objects.get(id=pk)
+    # room_messages = job.message_set.all()
+    # participants = job.participants.all()
 
     # if request.method == 'POST':
     #     message = Message.objects.create(
     #         user=request.user,
-    #         room=room,
+    #         job=job,
     #         body=request.POST.get('body')
     #     )
-    #     room.participants.add(request.user)
-    #     return redirect('room', pk=room.id)
+    #     job.participants.add(request.user)
+    #     return redirect('job', pk=job.id)
 
-    # context = {'room': room, 'room_messages': room_messages,
+    # context = {'job': job, 'room_messages': room_messages,
     #            'participants': participants}
     context = {}
-    return render(request, 'base/room.html', context)
+    return render(request, 'base/job.html', context)
 
 
 def userProfile(request, pk):
@@ -122,7 +122,7 @@ def createRoom(request):
         # topic_name = request.POST.get('topic')
         # topic, created = Topic.objects.get_or_create(name=topic_name)
 
-        # Room.objects.create(
+        # Job.objects.create(
         #     host=request.user,
         #     topic=topic,
         #     name=request.POST.get('name'),
@@ -137,37 +137,37 @@ def createRoom(request):
 
 @login_required(login_url='login')
 def updateRoom(request, pk):
-    # room = Room.objects.get(id=pk)
-    # form = RoomForm(instance=room)
+    # job = Job.objects.get(id=pk)
+    # form = RoomForm(instance=job)
     # topics = Topic.objects.all()
-    # if request.user != room.host:
+    # if request.user != job.host:
     #     return HttpResponse('Your are not allowed here!!')
 
     # if request.method == 'POST':
     #     topic_name = request.POST.get('topic')
     #     topic, created = Topic.objects.get_or_create(name=topic_name)
-    #     room.name = request.POST.get('name')
-    #     room.topic = topic
-    #     room.description = request.POST.get('description')
-    #     room.save()
+    #     job.name = request.POST.get('name')
+    #     job.topic = topic
+    #     job.description = request.POST.get('description')
+    #     job.save()
     #     return redirect('home')
 
-    # context = {'form': form, 'topics': topics, 'room': room}
+    # context = {'form': form, 'topics': topics, 'job': job}
     
     return render(request, 'base/room_form.html', {})
 
 
 @login_required(login_url='login')
 def deleteRoom(request, pk):
-    # room = Room.objects.get(id=pk)
+    # job = Job.objects.get(id=pk)
 
-    # if request.user != room.host:
+    # if request.user != job.host:
     #     return HttpResponse('Your are not allowed here!!')
 
     # if request.method == 'POST':
-    #     room.delete()
+    #     job.delete()
     #     return redirect('home')
-    # context = {'obj': room}
+    # context = {'obj': job}
     return render(request, 'base/delete.html', {})
 
 

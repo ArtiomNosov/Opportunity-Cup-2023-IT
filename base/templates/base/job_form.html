@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<main class="create-room layout">
+<main class="create-job layout">
   <div class="container">
     <div class="layout__box">
       <div class="layout__boxHeader">
@@ -14,7 +14,7 @@
               </path>
             </svg>
           </a>
-          <h3>Create/Update Study Room</h3>
+          <h3>Create/Update Job</h3>
         </div>
       </div>
       <div class="layout__body">
@@ -23,7 +23,7 @@
 
           <div class="form__group">
             <label for="room_topic">Enter a Topic</label>
-            <input required type="text" value="{{room.topic.name}}" name="topic" list="topic-list" />
+            <input required type="text" value="{{job.topic.name}}" name="topic" list="topic-list" />
             <datalist id="topic-list">
               <select id="room_topic">
                 {% for topic in topics %}
@@ -35,12 +35,12 @@
 
 
           <div class="form__group">
-            <label for="room_name">Room Name</label>
+            <label for="room_name">Job Name</label>
             {{form.name}}
           </div>
 
           <div class="form__group">
-            <label for="room_description">Room Description</label>
+            <label for="room_description">Job Description</label>
             {{form.description}}
           </div>
 

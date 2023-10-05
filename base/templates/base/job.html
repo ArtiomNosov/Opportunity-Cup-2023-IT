@@ -3,8 +3,8 @@
 {% block content %}
 <main class="profile-page layout layout--2">
   <div class="container">
-    <!-- Room Start -->
-    <div class="room">
+    <!-- Job Start -->
+    <div class="job">
       <div class="room__top">
         <div class="room__topLeft">
           <a href="{% url 'home' %}">
@@ -15,11 +15,11 @@
               </path>
             </svg>
           </a>
-          <h3>Study Room</h3>
+          <h3>Study Job</h3>
         </div>
-        {% if room.host == request.user %}
+        {% if job.host == request.user %}
         <div class="room__topRight">
-          <a href="{% url 'update-room' room.id %}">
+          <a href="{% url 'update-job' job.id %}">
             <svg enable-background="new 0 0 24 24" height="32" viewBox="0 0 24 24" width="32"
               xmlns="http://www.w3.org/2000/svg">
               <title>edit</title>
@@ -38,7 +38,7 @@
               </g>
             </svg>
           </a>
-          <a href="{% url 'delete-room' room.id %}">
+          <a href="{% url 'delete-job' job.id %}">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
               <title>remove</title>
               <path
@@ -53,16 +53,16 @@
       <div class="room__box scroll">
         <div class="room__header scroll">
           <div class="room__info">
-            <h3>{{room.name}}</h3>
-            <span>{{room.created|timesince}} ago</span>
+            <h3>{{job.name}}</h3>
+            <span>{{job.created|timesince}} ago</span>
           </div>
           <div class="room__hosted">
             <p>Hosted By</p>
-            <a href="{% url 'user-profile' room.host.id %}" class="room__author">
+            <a href="{% url 'user-profile' job.host.id %}" class="room__author">
               <div class="avatar avatar--small">
-                <img src="{{room.host.avatar.url}}" />
+                <img src="{{job.host.avatar.url}}" />
               </div>
-              <span>@{{room.host.username}}</span>
+              <span>@{{job.host.username}}</span>
             </a>
           </div>
           <!-- <div class="room__details">
@@ -70,7 +70,7 @@
             rerum consectetur, voluptatem repudiandae eum ea porro cupiditate provident nulla, deserunt, ab ipsum
             corporis laboriosam deleniti molestias?
           </div> -->
-          <span class="room__topics">{{room.topic}}</span>
+          <span class="room__topics">{{job.topic}}</span>
         </div>
 
         <div class="room__conversation">
@@ -119,7 +119,7 @@
         </form>
       </div>
     </div>
-    <!-- Room End -->
+    <!-- Job End -->
 
     <!--   Start -->
     <div class="participants">
