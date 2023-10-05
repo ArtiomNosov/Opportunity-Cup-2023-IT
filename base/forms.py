@@ -13,7 +13,7 @@ class MyUserCreationForm(UserCreationForm):
 class JobForm(ModelForm):
     class Meta:
         model = Job
-        fields = '__all__'
+        fields = ['name', 'description', 'topic', 'cost']
         exclude = []
 
 

@@ -30,11 +30,15 @@ class JobStatus(models.Model):
 class Job(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
-    cost = MoneyField(max_digits=19, decimal_places=4, default_currency='RUB')
+    cost = models.DecimalField(max_digits=20, decimal_places=2, null=False)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     status = models.ForeignKey(JobStatus, on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['-updated', '-created']
 
 class MatchType(models.Model):
     name = models.CharField(max_length=200)

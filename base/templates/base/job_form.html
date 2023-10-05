@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} # TODO: исправить форму создания работы, чтобы отображалось поле стоимости
 
 {% block content %}
 <main class="create-job layout">
@@ -44,19 +44,10 @@
             {{form.description}}
           </div>
 
-          <!-- <div class="form__group">
-            <label for="job_topic">Topic</label>
-            <input required type="text" name="topic" id="job_topic" list="topic-list" />
-            <datalist id="topic-list">
-              <select id="job_topic">
-                <option value="">Select your topic</option>
-                <option value="Python">Python</option>
-                <option value="Django">Django</option>
-              </select>
-            </datalist>
-
-          </div> -->
-
+          <div class="form__group">
+            <label for="job_cost">Job Cost</label>
+            {{form.cost}}
+          </div>
 
           <div class="form__action">
             <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>

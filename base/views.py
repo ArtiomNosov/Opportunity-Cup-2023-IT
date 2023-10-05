@@ -121,22 +121,29 @@ def userProfile(request, pk):
 
 @login_required(login_url='login')
 def createJob(request):
-    # form = JobForm()
-    # topics = Topic.objects.all()
+    form = JobForm()
+    topics = Topic.objects.all()
     if request.method == 'POST':
-        # topic_name = request.POST.get('topic')
-        # topic, created = Topic.objects.get_or_create(name=topic_name)
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
 
-        # Job.objects.create(
-        #     host=request.user,
-        #     topic=topic,
-        #     name=request.POST.get('name'),
-        #     description=request.POST.get('description'),
-        # )
+        job = Job.objects.create(
+            topic=topic,
+            name=request.POST.get('name'),
+            description=request.POST.get('description'),
+            status = JobStatus.objects.get_or_create(name='Find performer')[0],
+            cost=request.POST.get('cost'), # NULL
+        )
+        job.save()
+        match = Match.objects.create(
+            job = job,
+            user = request.user,
+            type = MatchType.objects.get_or_create(name='Customer')[0],
+        )
+        match.save()
         return redirect('home')
 
-    # context = {'form': form, 'topics': topics}
-    context = {}
+    context = {'form': form, 'topics': topics}
     return render(request, 'base/job_form.html', context)
 
 
