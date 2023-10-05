@@ -1,21 +1,21 @@
-{% for job in rooms %}
-<div class="roomListRoom">
-    <div class="roomListRoom__header">
-        <a href="{% url 'user-profile' job.host.id %}" class="roomListRoom__author">
+{% for job in jobs %}
+<div class="jobListJob">
+    <div class="jobListJob__header">
+        <a href="{% url 'user-profile' job.host.id %}" class="jobListJob__author">
             <div class="avatar avatar--small">
                 <img src="{{job.host.avatar.url}}" />
             </div>
             <span>@{{job.host.username}}</span>
         </a>
-        <div class="roomListRoom__actions">
+        <div class="jobListJob__actions">
             <span>{{job.created|timesince}} ago</span>
         </div>
     </div>
-    <div class="roomListRoom__content">
+    <div class="jobListJob__content">
         <a href="{% url 'job' job.id %}">{{job.name}}</a>
     </div>
-    <div class="roomListRoom__meta">
-        <a href="{% url 'job' job.id %}" class="roomListRoom__joined">
+    <div class="jobListJob__meta">
+        <a href="{% url 'job' job.id %}" class="jobListJob__joined">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                 <title>user-group</title>
                 <path
@@ -33,7 +33,7 @@
             </svg>
             {{job.participants.all.count}} Joined
         </a>
-        <p class="roomListRoom__topic">{{job.topic.name}}</p>
+        <p class="jobListJob__topic">{{job.topic.name}}</p>
     </div>
 </div>
 {% endfor %}

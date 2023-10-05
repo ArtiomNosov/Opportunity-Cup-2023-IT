@@ -5,8 +5,8 @@
   <div class="container">
     <!-- Job Start -->
     <div class="job">
-      <div class="room__top">
-        <div class="room__topLeft">
+      <div class="job__top">
+        <div class="job__topLeft">
           <a href="{% url 'home' %}">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
               <title>arrow-left</title>
@@ -18,7 +18,7 @@
           <h3>Study Job</h3>
         </div>
         {% if job.host == request.user %}
-        <div class="room__topRight">
+        <div class="job__topRight">
           <a href="{% url 'update-job' job.id %}">
             <svg enable-background="new 0 0 24 24" height="32" viewBox="0 0 24 24" width="32"
               xmlns="http://www.w3.org/2000/svg">
@@ -50,34 +50,34 @@
         {% endif %}
 
       </div>
-      <div class="room__box scroll">
-        <div class="room__header scroll">
-          <div class="room__info">
+      <div class="job__box scroll">
+        <div class="job__header scroll">
+          <div class="job__info">
             <h3>{{job.name}}</h3>
             <span>{{job.created|timesince}} ago</span>
           </div>
-          <div class="room__hosted">
+          <div class="job__hosted">
             <p>Hosted By</p>
-            <a href="{% url 'user-profile' job.host.id %}" class="room__author">
+            <a href="{% url 'user-profile' job.host.id %}" class="job__author">
               <div class="avatar avatar--small">
                 <img src="{{job.host.avatar.url}}" />
               </div>
               <span>@{{job.host.username}}</span>
             </a>
           </div>
-          <!-- <div class="room__details">
+          <!-- <div class="job__details">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi, tenetur laudantium? Dicta repellendus
             rerum consectetur, voluptatem repudiandae eum ea porro cupiditate provident nulla, deserunt, ab ipsum
             corporis laboriosam deleniti molestias?
           </div> -->
-          <span class="room__topics">{{job.topic}}</span>
+          <span class="job__topics">{{job.topic}}</span>
         </div>
 
-        <div class="room__conversation">
+        <div class="job__conversation">
           <div class="threads scroll">
 
 
-            {% for message in room_messages %}
+            {% for message in job_messages %}
             <div class="thread">
               <div class="thread__top">
                 <div class="thread__author">
@@ -112,7 +112,7 @@
         </div>
 
       </div>
-      <div class="room__message">
+      <div class="job__message">
         <form action="" method="POST">
           {% csrf_token %}
           <input name="body" placeholder="Write your message here..." />

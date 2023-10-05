@@ -11,7 +11,7 @@
     <!-- Topics End -->
 
     <!-- Job List Start -->
-    <div class="roomList">
+    <div class="jobList">
       <div class="mobile-menu">
         <form action="{% url 'home' %}" method="GET" class="header__search">
           <label>
@@ -30,10 +30,10 @@
         </div>
       </div>
 
-      <div class="roomList__header">
+      <div class="jobList__header">
         <div>
-          <h2>Study Rooms</h2>
-          <p>{{room_count}} Rooms available</p>
+          <h2>Study Jobs</h2>
+          <p>{{job_count}} Jobs available</p>
         </div>
 
         <a class="btn btn--main" href="{% url 'create-job' %}">

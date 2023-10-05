@@ -22,10 +22,10 @@
           {% csrf_token %}
 
           <div class="form__group">
-            <label for="room_topic">Enter a Topic</label>
+            <label for="job_topic">Enter a Topic</label>
             <input required type="text" value="{{job.topic.name}}" name="topic" list="topic-list" />
             <datalist id="topic-list">
-              <select id="room_topic">
+              <select id="job_topic">
                 {% for topic in topics %}
                 <option value="{{topic.name}}">{{topic.name}}</option>
                 {% endfor %}
@@ -35,20 +35,20 @@
 
 
           <div class="form__group">
-            <label for="room_name">Job Name</label>
+            <label for="job_name">Job Name</label>
             {{form.name}}
           </div>
 
           <div class="form__group">
-            <label for="room_description">Job Description</label>
+            <label for="job_description">Job Description</label>
             {{form.description}}
           </div>
 
           <!-- <div class="form__group">
-            <label for="room_topic">Topic</label>
-            <input required type="text" name="topic" id="room_topic" list="topic-list" />
+            <label for="job_topic">Topic</label>
+            <input required type="text" name="topic" id="job_topic" list="topic-list" />
             <datalist id="topic-list">
-              <select id="room_topic">
+              <select id="job_topic">
                 <option value="">Select your topic</option>
                 <option value="Python">Python</option>
                 <option value="Django">Django</option>

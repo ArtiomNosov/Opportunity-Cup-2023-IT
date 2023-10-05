@@ -65,5 +65,5 @@ if (photoInput)
   };
 
 // Scroll to Bottom
-const conversationThread = document.querySelector(".room__box");
+const conversationThread = document.querySelector(".job__box");
 if (conversationThread) conversationThread.scrollTop = conversationThread.scrollHeight;
