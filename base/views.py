@@ -93,11 +93,13 @@ def job(request, pk):
             body=request.POST.get('body')
         )
         message.save()
-        # job.participants.add(request.user)
-        # match = Match.objects.create(
-
-        # )
-
+        if Match.objects.filter(user=request.user).count() == 0:
+            match = Match.objects.create(
+                job = job,
+                user = request.user,
+                type = MatchType.objects.get_or_create(name='Participant')[0]
+            )
+            match.save()
         return redirect('job', pk=job.id)
     
     job_customer = User.objects.all()[0] # job_customer
