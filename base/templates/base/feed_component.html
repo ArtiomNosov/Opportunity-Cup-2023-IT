@@ -1,11 +1,11 @@
 {% for job in jobs %}
 <div class="jobListJob">
     <div class="jobListJob__header">
-        <a href="{% url 'user-profile' job.host.id %}" class="jobListJob__author">
+        <a href="{% url 'user-profile' job_customer.id %}" class="jobListJob__author">
             <div class="avatar avatar--small">
-                <img src="{{job.host.avatar.url}}" />
+                <img src="{{job_customer.avatar.url}}" />
             </div>
-            <span>@{{job.host.username}}</span>
+            <span>@{{job_customer.username}}</span>
         </a>
         <div class="jobListJob__actions">
             <span>{{job.created|timesince}} ago</span>
@@ -31,7 +31,7 @@
                     d="M12 16c3.859 0 7-3.141 7-7s-3.141-7-7-7c-3.859 0-7 3.141-7 7s3.141 7 7 7zM12 4c2.757 0 5 2.243 5 5s-2.243 5-5 5-5-2.243-5-5c0-2.757 2.243-5 5-5z">
                 </path>
             </svg>
-            {{job.participants.all.count}} Joined
+            {{job_participants.count}} Joined
         </a>
         <p class="jobListJob__topic">{{job.topic.name}}</p>
     </div>

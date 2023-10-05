@@ -65,34 +65,45 @@ def home(request):
         Q(description__icontains=q)
     )
 
-    # topics = Topic.objects.all()[0:5]
-    # job_count = jobs.count()
-    # job_messages = Message.objects.filter(
-    #     Q(job__topic__name__icontains=q))[0:3]
+    topics = Topic.objects.all()[0:5]
+    job_count = jobs.count()
+    job_messages = Message.objects.filter(
+        Q(job__topic__name__icontains=q))[0:3]
 
-    # context = {'jobs': jobs, 'topics': topics,
-    #            'job_count': job_count, 'job_messages': job_messages}
-    context = {}
+    job_customer = User.objects.all()[0] # TODO: правильно определить customer для этой job
+
+    context = {'jobs': jobs, 
+               'job_customer': job_customer, 
+               'topics': topics,
+               'job_count': job_count, 
+               'job_messages': job_messages}
+    
     return render(request, 'base/home.html', context)
 
 
 def job(request, pk):
-    # job = Job.objects.get(id=pk)
-    # job_messages = job.message_set.all()
+    job = Job.objects.get(id=pk)
+    job_messages = job.message_set.all()
     # participants = job.participants.all()
+    participants = User.objects.all() # TODO: правильно определять всех participant для данной job
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user=request.user,
+            job=job,
+            body=request.POST.get('body')
+        )
+        message.save()
+        # job.participants.add(request.user)
+        # match = Match.objects.create(
 
-    # if request.method == 'POST':
-    #     message = Message.objects.create(
-    #         user=request.user,
-    #         job=job,
-    #         body=request.POST.get('body')
-    #     )
-    #     job.participants.add(request.user)
-    #     return redirect('job', pk=job.id)
+        # )
 
-    # context = {'job': job, 'job_messages': job_messages,
-    #            'participants': participants}
-    context = {}
+        return redirect('job', pk=job.id)
+    
+    job_customer = User.objects.all()[0] # job_customer
+    context = {'job': job, 'job_messages': job_messages,
+               'participants': participants,
+               'job_customer': job_customer}
     return render(request, 'base/job.html', context)
 
 

@@ -17,7 +17,7 @@
           </a>
           <h3>Job</h3>
         </div>
-        {% if job.host == request.user %}
+        {% if job_customer == request.user %}
         <div class="job__topRight">
           <a href="{% url 'update-job' job.id %}">
             <svg enable-background="new 0 0 24 24" height="32" viewBox="0 0 24 24" width="32"
@@ -58,11 +58,11 @@
           </div>
           <div class="job__hosted">
             <p>Hosted By</p>
-            <a href="{% url 'user-profile' job.host.id %}" class="job__author">
+            <a href="{% url 'user-profile' job_customer.id %}" class="job__author">
               <div class="avatar avatar--small">
-                <img src="{{job.host.avatar.url}}" />
+                <img src="{{job_customer.avatar.url}}" />
               </div>
-              <span>@{{job.host.username}}</span>
+              <span>@{{job_customer.username}}</span>
             </a>
           </div>
           <!-- <div class="job__details">

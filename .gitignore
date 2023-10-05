@@ -2,5 +2,6 @@ venv
 db.sqllite3
 db.sqlite3
 studybud/__pycache__
+base/__pycache__
 base/__pycache__/urls.cpython-311.pyc
 base/__pycache__/views.cpython-311.pyc
