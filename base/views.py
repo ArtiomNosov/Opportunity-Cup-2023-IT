@@ -7,14 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from .models import User, Topic, JobStatus, Job, MatchType, Match, ReviewType, Review, Message
 from .forms import JobForm, UserForm, MyUserCreationForm
 
-# Create your views here.
-
-# rooms = [
-#     {'id': 1, 'name': 'Lets learn python!'},
-#     {'id': 2, 'name': 'Design with me'},
-#     {'id': 3, 'name': 'Frontend developers'},
-# ]
-
 
 def loginPage(request):
     page = 'login'
@@ -65,28 +57,28 @@ def registerPage(request):
 
 
 def home(request):
-    # q = request.GET.get('q') if request.GET.get('q') != None else ''
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    # rooms = Job.objects.filter(
-    #     Q(topic__name__icontains=q) |
-    #     Q(name__icontains=q) |
-    #     Q(description__icontains=q)
-    # )
+    jobs = Job.objects.filter(
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q)
+    )
 
     # topics = Topic.objects.all()[0:5]
-    # room_count = rooms.count()
-    # room_messages = Message.objects.filter(
-    #     Q(room__topic__name__icontains=q))[0:3]
+    # job_count = jobs.count()
+    # job_messages = Message.objects.filter(
+    #     Q(job__topic__name__icontains=q))[0:3]
 
-    # context = {'rooms': rooms, 'topics': topics,
-    #            'room_count': room_count, 'room_messages': room_messages}
+    # context = {'jobs': jobs, 'topics': topics,
+    #            'job_count': job_count, 'job_messages': job_messages}
     context = {}
     return render(request, 'base/home.html', context)
 
 
 def job(request, pk):
     # job = Job.objects.get(id=pk)
-    # room_messages = job.message_set.all()
+    # job_messages = job.message_set.all()
     # participants = job.participants.all()
 
     # if request.method == 'POST':
@@ -98,7 +90,7 @@ def job(request, pk):
     #     job.participants.add(request.user)
     #     return redirect('job', pk=job.id)
 
-    # context = {'job': job, 'room_messages': room_messages,
+    # context = {'job': job, 'job_messages': job_messages,
     #            'participants': participants}
     context = {}
     return render(request, 'base/job.html', context)
@@ -106,17 +98,17 @@ def job(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    rooms = user.room_set.all()
-    room_messages = user.message_set.all()
+    jobs = user.job_set.all()
+    job_messages = user.message_set.all()
     topics = Topic.objects.all()
-    context = {'user': user, 'rooms': rooms,
-               'room_messages': room_messages, 'topics': topics}
+    context = {'user': user, 'jobs': jobs,
+               'job_messages': job_messages, 'topics': topics}
     return render(request, 'base/profile.html', context)
 
 
 @login_required(login_url='login')
-def createRoom(request):
-    # form = RoomForm()
+def createJob(request):
+    # form = JobForm()
     # topics = Topic.objects.all()
     if request.method == 'POST':
         # topic_name = request.POST.get('topic')
@@ -132,13 +124,13 @@ def createRoom(request):
 
     # context = {'form': form, 'topics': topics}
     context = {}
-    return render(request, 'base/room_form.html', context)
+    return render(request, 'base/job_form.html', context)
 
 
 @login_required(login_url='login')
-def updateRoom(request, pk):
+def updateJob(request, pk):
     # job = Job.objects.get(id=pk)
-    # form = RoomForm(instance=job)
+    # form = JobForm(instance=job)
     # topics = Topic.objects.all()
     # if request.user != job.host:
     #     return HttpResponse('Your are not allowed here!!')
@@ -154,11 +146,11 @@ def updateRoom(request, pk):
 
     # context = {'form': form, 'topics': topics, 'job': job}
     
-    return render(request, 'base/room_form.html', {})
+    return render(request, 'base/job_form.html', {})
 
 
 @login_required(login_url='login')
-def deleteRoom(request, pk):
+def deleteJob(request, pk):
     # job = Job.objects.get(id=pk)
 
     # if request.user != job.host:
@@ -205,5 +197,5 @@ def topicsPage(request):
 
 
 def activityPage(request):
-    room_messages = Message.objects.all()
-    return render(request, 'base/activity.html', {'room_messages': room_messages})
+    job_messages = Message.objects.all()
+    return render(request, 'base/activity.html', {'job_messages': job_messages})
