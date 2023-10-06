@@ -193,18 +193,23 @@ def updateJob(request, pk):
     
     return render(request, 'base/job_form.html', context)
 
+def get_customer(job):
+    customer_id = Match.objects.filter(job=job, type=MatchType.objects.get_or_create(name='Customer')[0]).values('user')
+    job_customer = User.objects.filter(id=customer_id[0]['user'])[0]
+    return job_customer
 
 @login_required(login_url='login')
 def deleteJob(request, pk):
-    # job = Job.objects.get(id=pk)
+    job = Job.objects.get(id=pk)
+    job_customer = get_customer(job)
 
-    # if request.user != job.host:
-    #     return HttpResponse('Your are not allowed here!!')
+    if request.user != job_customer:
+        return HttpResponse('Your are not allowed here!!')
 
-    # if request.method == 'POST':
-    #     job.delete()
-    #     return redirect('home')
-    # context = {'obj': job}
+    if request.method == 'POST':
+        job.delete()
+        return redirect('home')
+    context = {'obj': job}
     return render(request, 'base/delete.html', {})
 
 
