@@ -21,28 +21,6 @@
         <form class="balance__view" action="" method="POST">
           {% csrf_token %}
           <label for="job_topic">У вас на балансе: 1000 руб.</label>
-
-
-
-          <div class="form__group">
-            <label for="job_name">Job Name</label>
-            {{form.name}}
-          </div>
-
-          <div class="form__group">
-            <label for="job_description">Job Description</label>
-            {{form.description}}
-          </div>
-
-          <div class="form__group">
-            <label for="job_cost">Job Cost</label>
-            {{form.cost}}
-          </div>
-
-          <div class="form__action">
-            <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>
-            <button class="btn btn--main" type="submit">Submit</button>
-          </div>
         </form>
       </div>
     </div>
