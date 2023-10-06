@@ -30,7 +30,7 @@
 
         </div>
         <div class="activities__boxContent">
-            <p>replied to post “<a href="{% url 'job' message.job.id %}">{{message.job}}</a>”</p>
+            <p>replied to post “<a href="{% url 'job' message.job.id %}">{{message.job.name}}</a>”</p>
             <div class="activities__boxJobContent">{{message.body}}</div>
         </div>
     </div>
