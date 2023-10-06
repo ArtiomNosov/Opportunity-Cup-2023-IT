@@ -25,7 +25,7 @@ SECRET_KEY = 'e9fd9g898g98c9-sr-90-s-90(SD(S9f9(*f9df89890)))'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # TODO: когда деплоить будешь False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['artiomnosov.pythonanywhere.com']
 
 
 # Application definition
