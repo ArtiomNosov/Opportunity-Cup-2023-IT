@@ -4,10 +4,6 @@ from .models import Job, User
 from django import forms
 
 
-class SlugField(CharField):
-    default_validators = [validators.validate_slug]
-
-
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User

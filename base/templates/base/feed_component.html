@@ -14,7 +14,7 @@
     </div>
     <div class="jobListJob__content">
         <a href="{% url 'job' job.id %}">{{job.name}}</a>
-        <p><span class="cost">1500 руб.</span></p>
+        <p><span class="cost">{{job.cost}} руб.</span></p>
     </div>
     <div class="jobListJob__meta">
         <a href="{% url 'job' job.id %}" class="jobListJob__joined">

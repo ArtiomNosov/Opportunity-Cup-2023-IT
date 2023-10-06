@@ -5,3 +5,7 @@ studybud/__pycache__
 base/__pycache__
 base/__pycache__/urls.cpython-311.pyc
 base/__pycache__/views.cpython-311.pyc
+studybud/etc/secret_key.txt
+# Text backup files
+*.bak
+db.sqlite3

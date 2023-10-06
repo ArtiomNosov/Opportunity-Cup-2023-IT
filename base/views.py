@@ -60,6 +60,16 @@ def get_customer(job):
     customer_id = Match.objects.filter(job=job, type=MatchType.objects.get_or_create(name='Customer')[0]).values('user')[0]
     return User.objects.get(id=customer_id['user'])
 
+def get_job_to_customer(jobs):
+    job_to_customer = {}  # Создаем пустой словарь
+
+    for job in jobs:
+        customer = get_customer(job)
+        if customer:
+            job_to_customer[job] = customer
+    
+    return job_to_customer
+
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
@@ -74,16 +84,13 @@ def home(request):
     job_messages = Message.objects.filter(
         Q(job__topic__name__icontains=q))[0:3]
 
-    # job_customer = User.objects.all()[0] # TODO: правильно определить customer для этой job
-    # job_to_customer = Match.objects.filter(type=MatchType.objects.get_or_create(name='Customer')[0]).values('job', 'user')
-    job_to_customer = {}  # Создаем пустой словарь
+    job_to_customer = get_job_to_customer(jobs)  
 
     for job in jobs:
         customer = get_customer(job)
         if customer:
             job_to_customer[job] = customer 
 
-    messages.error(request, f'{jobs}')
     context = {'jobs': jobs, 
                'job_to_customer': job_to_customer, 
                'topics': topics,
@@ -172,18 +179,19 @@ def updateJob(request, pk):
     if request.user != job_customer:
         return HttpResponse('Your are not allowed here!!')
 
-    # if request.method == 'POST':
-    #     topic_name = request.POST.get('topic')
-    #     topic, created = Topic.objects.get_or_create(name=topic_name)
-    #     job.name = request.POST.get('name')
-    #     job.topic = topic
-    #     job.description = request.POST.get('description')
-    #     job.save()
-    #     return redirect('home')
+    if request.method == 'POST':
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+        job.name = request.POST.get('name')
+        job.topic = topic
+        job.description = request.POST.get('description')
+        job.cost = request.POST.get('cost')
+        job.save()
+        return redirect('home')
 
-    # context = {'form': form, 'topics': topics, 'job': job}
+    context = {'form': form, 'topics': topics, 'job': job}
     
-    return render(request, 'base/job_form.html', {})
+    return render(request, 'base/job_form.html', context)
 
 
 @login_required(login_url='login')
