@@ -30,7 +30,7 @@
 
         </div>
         <div class="activities__boxContent">
-            <p>replied to post “<a href="{% url 'job' message.job.id %}">{{message.job.name}}</a>”</p>
+            <div>Ответ на заказ: <a href="{% url 'job' message.job.id %}">“{{message.job.name}}”</a></div>
             <div class="activities__boxJobContent">{{message.body}}</div>
         </div>
     </div>

@@ -805,6 +805,52 @@ a {
 }
 
 /*==============================
+=>  User Balance
+================================*/
+
+.user__balance .balance__box{
+  max-width: 68rem;
+}
+
+/* Стили для кнопки "Пополнить баланс" */
+.recharge-button {
+  background-color: var(--color-main);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Стили для таблицы списка зачисления и снятия */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.transaction-table th,
+.transaction-table td {
+  border: 1px solid var(--color-light-gray);
+  padding: 10px;
+  text-align: center;
+}
+
+.transaction-table th {
+  background-color: var(--color-main);
+  color: white;
+}
+
+.transaction-table tbody tr:nth-child(even) {
+  background-color: var(--color-light);
+}
+
+.transaction-table tbody tr:hover {
+  background-color: var(--color-main-light);
+}
+
+/*==============================
 =>  Update Account
 ================================*/
 

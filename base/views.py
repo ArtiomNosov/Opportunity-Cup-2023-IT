@@ -86,11 +86,6 @@ def home(request):
 
     job_to_customer = get_job_to_customer(jobs)  
 
-    for job in jobs:
-        customer = get_customer(job)
-        if customer:
-            job_to_customer[job] = customer 
-
     context = {'jobs': jobs, 
                'job_to_customer': job_to_customer, 
                'topics': topics,
@@ -133,10 +128,13 @@ def job(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    jobs = user.job_set.all()
+    jobs = Job.objects.filter(id__in=[x['job'] for x in 
+        Match.objects.filter(user=user, type=MatchType.objects.get_or_create(name='Customer')[0].id).values('job')
+    ])
     job_messages = user.message_set.all()
     topics = Topic.objects.all()
-    context = {'user': user, 'jobs': jobs,
+    job_to_customer = get_job_to_customer(jobs)
+    context = {'user': user, 'job_to_customer': job_to_customer,
                'job_messages': job_messages, 'topics': topics}
     return render(request, 'base/profile.html', context)
 
