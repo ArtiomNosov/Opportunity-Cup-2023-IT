@@ -62,16 +62,16 @@ python manage.py runserver
 &nbsp; 
 <br>
 <p align="center">
-  Feed Home
+  Главная страница
 </p>
-<img src="static\images\MainPage.png">
+<img src="static\images\home.png">
 </td> 
 <td width="50%">
 <br>
 <p align="center">
-  Room Conversation Preview
+  Страница с заказом
 </p>
-<img src="static\images\WorkRoom.png">  
+<img src="static\images\job.png">  
 </td>
 </table>
 
