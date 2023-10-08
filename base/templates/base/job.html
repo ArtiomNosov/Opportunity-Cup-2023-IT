@@ -15,7 +15,7 @@
               </path>
             </svg>
           </a>
-          <h3>Job</h3>
+          <h3>Заказ</h3>
         </div>
         {% if job_customer == request.user %}
         <div class="job__topRight">
@@ -123,7 +123,7 @@
 
     <!--   Start -->
     <div class="participants">
-      <h3 class="participants__top">Participants <span>({{participants.count}} Joined)</span></h3>
+      <h3 class="participants__top">Участники <span>({{participants.count}} Присоединились)</span></h3>
       <div class="participants__list scroll">
         {% for user in participants %}
         <a href="{%  url 'user-profile' user.id %}" class="participant">
