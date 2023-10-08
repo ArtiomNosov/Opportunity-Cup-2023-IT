@@ -54,7 +54,7 @@
         <div class="job__header scroll">
           <div class="job__info">
             <h3>{{job.name}}</h3>
-            <span>{{job.created|timesince}} ago</span>
+            <span>{{job.created|timesince}} назад</span>
           </div>
           <div class="job__hosted">
             <p>Заказчик</p>
@@ -87,7 +87,7 @@
                     </div>
                     <span>@{{message.user.username}}</span>
                   </a>
-                  <span class="thread__date">{{message.created|timesince}} ago</span>
+                  <span class="thread__date">{{message.created|timesince}} назад</span>
                 </div>
 
                 {% if request.user == message.user %}

@@ -140,7 +140,7 @@ def userProfile(request, pk):
 
 def userBalance(request, pk): # TODO:
     user = User.objects.get(id=pk)
-    transactions = user.transaction_set
+    transactions = user.transaction_set.all()
     context = {
         'user': user,
         'transactions': transactions
