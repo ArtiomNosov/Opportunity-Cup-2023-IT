@@ -1,5 +1,5 @@
 <div align="center">
-<img width="30%" src="static\images\logo.jxr">
+<img width="30%" src="static\images\logo.avif">
 
 # Continue: GoodFreelance
 </div>
