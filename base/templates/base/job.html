@@ -110,14 +110,19 @@
             {% endfor %}
           </div>
         </div>
-
       </div>
+      
       <div class="job__message">
+        {% if request.user.is_authenticated %}
         <form action="" method="POST">
           {% csrf_token %}
           <input name="body" placeholder="Напишите сообщение здесь..." />
         </form>
+        {% else %}
+        <a href="{%  url 'login' %}">Вам нужно авторизоваться, чтобы написать сообщение</a>
+        {% endif %}
       </div>
+
     </div>
     <!-- Job End -->
 
