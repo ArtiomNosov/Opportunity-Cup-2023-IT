@@ -138,6 +138,15 @@ def userProfile(request, pk):
                'job_messages': job_messages, 'topics': topics}
     return render(request, 'base/profile.html', context)
 
+def userBalance(request, pk): # TODO:
+    user = User.objects.get(id=pk)
+    transactions = user.transaction_set
+    context = {
+        'user': user,
+        'transactions': transactions
+    }
+    return render(request, f'base/balance.html', context)
+
 
 @login_required(login_url='login')
 def createJob(request):

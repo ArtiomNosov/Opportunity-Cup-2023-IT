@@ -21,7 +21,7 @@
         <div class="balance__body">
           <form class="balance__view" action="" method="POST">
             {% csrf_token %}
-            <label for="job_topic">У вас на балансе: 1000 руб.</label>
+            <label for="job_topic">У вас на балансе: {{user.balance}} руб.</label>
           </form>
           <table class="transaction-table">
             <thead>
@@ -33,12 +33,14 @@
               </tr>
             </thead>
             <tbody>
+              {for transaction in transactions}
               <tr>
                 <td>01.01.2023</td>
                 <td>Зачисление</td>
                 <td>500 руб.</td>
                 <td>Интернет магазин</td>
               </tr>
+              {endfor}
               <tr>
                 <td>02.01.2023</td>
                 <td>Списание</td>
