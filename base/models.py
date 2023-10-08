@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from djmoney.models.fields import MoneyField
 
 
 class User(AbstractUser):
