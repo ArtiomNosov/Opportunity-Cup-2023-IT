@@ -26,4 +26,9 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['avatar', 'name', 'username', 'email', 'bio']
-    pass
+        widgets = {
+            'avatar': forms.TextInput(attrs={'placeholder': 'аватар', "title": "аватар"}),
+            'name': forms.TextInput(attrs={'placeholder': 'имя', "title": "имя"}),
+            'username': forms.TextInput(attrs={'placeholder': 'логин', "title": "логин"}),
+            'bio': forms.TextInput(attrs={'placeholder': 'био', "title": "био"}),
+        }
