@@ -4,37 +4,37 @@
 # Continue: GoodFreelance
 </div>
 
-### Cloning the repository
+### Клонируйте репозиторий
 
---> Clone the repository using the command below :
+--> Клонируйте репозиторий данной командой :
 ```bash
 git clone https://github.com/ArtiomNosov/Opportunity-Cup-2023-IT
 
 ```
 
---> Move into the directory where we have the project files : 
+--> Перейдите в директорию с проектными файлами : 
 ```bash
 cd GF
 
 ```
 
---> Create a virtual environment :
+--> Создайте виртуальное окружение :
 ```bash
-# Let's install virtualenv first
+# Сначала установим пакет virtualenv
 pip install virtualenv
 
-# Then we create our virtual environment
+# Затем создаём наше виртуально окружение 
 virtualenv envname
 
 ```
 
---> Activate the virtual environment :
+--> Активируем виртуальное окружение :
 ```bash
 envname\scripts\activate
 
 ```
 
---> Install the requirements :
+--> Устанавливаем все необходимые пакеты :
 ```bash
 pip install -r requirements.txt
 
@@ -42,19 +42,19 @@ pip install -r requirements.txt
 
 #
 
-### Running the App
+### Запускаем приложение
 
---> To run the App, we use :
+--> Для запуска мы используем :
 ```bash
 python manage.py runserver
 
 ```
 
-> ⚠ Then, the development server will be started at http://127.0.0.1:8000/
+> ⚠ Затем сервер разработки запустится по адресу http://127.0.0.1:8000/
 
 #
 
-### App Preview :
+### Демонстрация приложения :
 
 <table width="100%"> 
 <tr>
