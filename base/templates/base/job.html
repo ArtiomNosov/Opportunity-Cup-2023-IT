@@ -15,7 +15,7 @@
               </path>
             </svg>
           </a>
-          <h3>Job</h3>
+          <h3>Заказ</h3>
         </div>
         {% if job_customer == request.user %}
         <div class="job__topRight">
@@ -54,10 +54,10 @@
         <div class="job__header scroll">
           <div class="job__info">
             <h3>{{job.name}}</h3>
-            <span>{{job.created|timesince}} ago</span>
+            <span>{{job.created|timesince}} назад</span>
           </div>
           <div class="job__hosted">
-            <p>Hosted By</p>
+            <p>Заказчик</p>
             <a href="{% url 'user-profile' job_customer.id %}" class="job__author">
               <div class="avatar avatar--small">
                 <img src="{{job_customer.avatar.url}}" />
@@ -87,7 +87,7 @@
                     </div>
                     <span>@{{message.user.username}}</span>
                   </a>
-                  <span class="thread__date">{{message.created|timesince}} ago</span>
+                  <span class="thread__date">{{message.created|timesince}} назад</span>
                 </div>
 
                 {% if request.user == message.user %}
@@ -110,20 +110,25 @@
             {% endfor %}
           </div>
         </div>
-
       </div>
+      
       <div class="job__message">
+        {% if request.user.is_authenticated %}
         <form action="" method="POST">
           {% csrf_token %}
-          <input name="body" placeholder="Write your message here..." />
+          <input name="body" placeholder="Напишите сообщение здесь..." />
         </form>
+        {% else %}
+        <a href="{%  url 'login' %}">Вам нужно авторизоваться, чтобы написать сообщение</a>
+        {% endif %}
       </div>
+
     </div>
     <!-- Job End -->
 
     <!--   Start -->
     <div class="participants">
-      <h3 class="participants__top">Participants <span>({{participants.count}} Joined)</span></h3>
+      <h3 class="participants__top">Участники <span>({{participants.count}} Присоединились)</span></h3>
       <div class="participants__list scroll">
         {% for user in participants %}
         <a href="{%  url 'user-profile' user.id %}" class="participant">
