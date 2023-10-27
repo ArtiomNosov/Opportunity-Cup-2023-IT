@@ -2,6 +2,7 @@
 <img width="30%" src="static\images\logo.avif">
 
 # Continue: GoodFreelance
+# [Ссылка на сайт (pythonenywhere)](http://artiomnosov.pythonanywhere.com/)
 </div>
 
 ### Клонируйте репозиторий
